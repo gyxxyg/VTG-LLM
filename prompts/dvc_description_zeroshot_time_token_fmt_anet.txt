@@ -1,0 +1,1 @@
+Detect and report the start and end timestamps of activity events in the video, along with descriptions.

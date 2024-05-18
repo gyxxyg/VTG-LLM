@@ -1,0 +1,1 @@
+Please locate a series of events in the video, output the start and end timestamps of each event, and describe each event in sentences. The output format of each predicted event should be as follows: "Start - End seconds, event description".
