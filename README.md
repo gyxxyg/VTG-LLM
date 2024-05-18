@@ -1,4 +1,4 @@
-<h2 align="center"> <a href="">TimeChat: VTG-LLM: Integrating Timestamp Knowledge into Video LLMs for Enhanced Video Temporal Grounding</a></h2>
+<h2 align="center"> <a href="">VTG-LLM: Integrating Timestamp Knowledge into Video LLMs for Enhanced Video Temporal Grounding</a></h2>
 
 
 ## Abstract
