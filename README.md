@@ -8,7 +8,7 @@ First, it is essential to have high-quality instructional tuning datasets that e
 
 ## Data
 
-See [DATA.md](./docs/DATA.md)
+See [DATA.md](./docs/DATA.md) for downloading videos. The annotation can be found in `annotation` forder.
 
 ## Pretrained Models
 
