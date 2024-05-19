@@ -15,15 +15,15 @@ MODEL_DIR="yourpath/checkpoint_9.pth"
 
 # TASK='dvc'
 # ANNO_DIR='yourpath/data/dense_video_captioning/anet'
-# VIDEO_DIR='/group/20009/data/ActivityNet/anet_6fps_224'
+# VIDEO_DIR='yourpath/ActivityNet/anet_6fps_224'
 # DATASET='activitynet'
 # SPLIT='test'
 # PROMPT_FILE="yourpath/VTG-LLM/prompts/dvc_description_zeroshot_time_token_fmt_anet.txt"
 # GT_FILE="yourpath/data/dense_video_captioning/anet/val_2.json"
 
 # TASK='tvg'
-# ANNO_DIR="/cfs/cfs-lugcocyb/messijyliu/data/TimeIT/data/temporal_video_grounding/charades/charades_annotation"
-# VIDEO_DIR="/cfs/cfs-lugcocyb/messijyliu/data/Charades/videos"
+# ANNO_DIR="yourpath/charades_annotation"
+# VIDEO_DIR="yourpath/Charades/videos"
 # DATASET='charades'
 # SPLIT='test'
 # PROMPT_FILE="prompts/${TASK}_description_zeroshot_time_token_fmt_v3.txt"
@@ -32,7 +32,7 @@ MODEL_DIR="yourpath/checkpoint_9.pth"
 
 # TASK='vhd'
 # ANNO_DIR='yourpath/data/video_highlight_detection/qvhighlights'
-# VIDEO_DIR='/cfs/cfs-lugcocyb/messijyliu/data/QVhighlights/videos/val'
+# VIDEO_DIR='yourpath/QVhighlights/videos/val'
 # DATASET='qvhighlights'
 # SPLIT='val'
 # PROMPT_FILE="yourpath/VTG-LLM/prompts/vhd_description_zeroshot_time_token_fmt_v2.txt"

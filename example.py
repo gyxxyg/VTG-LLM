@@ -5,10 +5,10 @@ from PIL import Image
 import os
 import numpy as np
 
-target_dir = '/cfs/cfs-lugcocyb/yongxinguo/projects/project_temporal_video_understanding/sample_images'
+target_dir = 'yourpath/sample_images'
 
 video, _ = load_video(
-    video_path='/cfs/cfs-lugcocyb/messijyliu/data/QVhighlights/videos/val/NUsG9BgSes0_60.0_210.0.mp4',
+    video_path='yourpath/QVhighlights/videos/val/NUsG9BgSes0_60.0_210.0.mp4',
     n_frms=8,
     sampling ="uniform", return_msg = True
 )

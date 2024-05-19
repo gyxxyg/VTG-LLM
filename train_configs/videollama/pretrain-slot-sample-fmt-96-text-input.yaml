@@ -48,7 +48,7 @@ datasets:
   time_instruct:
     data_type: video
     build_info:
-      anno_dir: "/cfs/cfs-lugcocyb/yongxinguo/data/TimeIT/data/time/instruct_time-sensitive_120k_fmt_v2_special_time_token_v4.json"
+      anno_dir: "yourpath/vtg-it-120k.json"
       videos_dir: "/"
     vis_processor:
       train:
@@ -59,7 +59,7 @@ datasets:
       train:
         name: "blip_caption"
     num_video_query_token: 32
-    tokenizer_name: "/cfs/cfs-lugcocyb/llm_weights/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
+    tokenizer_name: "yourpath/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
     model_type: "llama_v2"
     num_frm: 96
     sample_type: 'rand'
@@ -73,7 +73,7 @@ datasets:
   valley72k_instruct:
     data_type: video
     build_info:
-      anno_dir: "/cfs/cfs-lugcocyb/yongxinguo/data/TimeIT/data/valley/instruct_valley_97k_refine_special_time_token_v3_shorten.json"
+      anno_dir: "yourpath/valley-97k.json"
       videos_dir: "/"
     vis_processor:
       train:
@@ -84,7 +84,7 @@ datasets:
       train:
         name: "blip_caption"
     num_video_query_token: 32
-    tokenizer_name: "/cfs/cfs-lugcocyb/llm_weights/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
+    tokenizer_name: "yourpath/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
     model_type: "llama_v2"
     num_frm: 96
     sample_type: 'rand'

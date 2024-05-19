@@ -49,7 +49,7 @@ datasets:
   time_instruct:
     data_type: video
     build_info:
-      anno_dir: "yourpath/instruct_time-sensitive_120k_fmt.json"
+      anno_dir: "yourpath/vtg-it-120K-no-time-token.json"
       videos_dir: "/"
     vis_processor:
       train:
@@ -74,7 +74,7 @@ datasets:
   valley72k_instruct:
     data_type: video
     build_info:
-      anno_dir: "yourpath/instruct_valley_97k_refine_special_time_token_v3_shorten.json"
+      anno_dir: "yourpath/valley-97k.json"
       videos_dir: "/"
     vis_processor:
       train:
