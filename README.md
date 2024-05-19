@@ -21,7 +21,6 @@ See [DATA.md](./docs/DATA.md) for downloading videos. The annotation can be foun
 #### Tuning
 Config the checkpoint and dataset paths in [pretrain-slot-sample-fmt-96.yaml](./train_configs/videollama/pretrain-slot-sample-fmt-96.yaml).
 ```
-conda activate timechat
 torchrun --nproc_per_node=16 train.py --cfg-path  train_configs/videollama/pretrain-slot-sample-fmt-96.yaml
 ```
 
