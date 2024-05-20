@@ -1,5 +1,5 @@
 model:
-  arch: timechat
+  arch: vtgllm
   model_type: pretrain_llama_v2
   freeze_vit: True
   freeze_qformer: False
