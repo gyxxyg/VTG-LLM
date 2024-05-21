@@ -1,10 +1,11 @@
 <h2 align="center"> <a href="">VTG-LLM: Integrating Timestamp Knowledge into Video LLMs for Enhanced Video Temporal Grounding</a></h2>
 
 
-## Abstract
+## Overview
 
-Video Temporal Grounding (VTG) focuses on accurately identifying event timestamps within a particular video based on a linguistic query, playing a vital role in downstream tasks such as video browsing and editing. While Video Large Language Models (video LLMs) have made significant progress in understanding video content, they often face challenges in accurately pinpointing timestamps within videos, which limits their performance on VTG tasks. Therefore, to improve video LLMs' ability to effectively locate timestamps, we argue that two critical aspects need to be enhanced. 
-First, it is essential to have high-quality instructional tuning datasets that encompass mainstream VTG tasks. Second, directly incorporating timestamp knowledge into video LLMs is crucial, as it enables models to efficiently comprehend timestamp information. To address these needs, we first introduce VTG-IT-120K, a high-quality and comprehensive instruction tuning dataset that covers VTG tasks such as moment retrieval, dense video captioning, video summarization, and video highlight detection. Furthermore, we propose a specially designed video LLM model for VTG tasks, VTG-LLM, which (1) effectively integrates timestamp knowledge into visual tokens; (2) incorporates absolute-time tokens that specifically handle timestamp knowledge, thereby avoiding concept shifts; and (3) introduces a lightweight, high-performance slot-based token compression method to facilitate the sampling of more video frames. Comprehensive experiments showcase the superior performance of VTG-LLM in comparison to other video LLM methods across various VTG tasks. We will make our code, model checkpoint, and datasets publicly accessible
+We introduce 
+- VTG-IT-120K, a high-quality and comprehensive instruction tuning dataset that covers VTG tasks such as moment retrieval (63.2K), dense video captioning (37.2K), video summarization (15.2K), and video highlight detection (3.9K).
+- VTG-LLM, which (1) effectively integrates timestamp knowledge into visual tokens; (2) incorporates absolute-time tokens that specifically handle timestamp knowledge, thereby avoiding concept shifts; and (3) introduces a lightweight, high-performance slot-based token compression method to facilitate the sampling of more video frames.
 
 
 ## Enviroments
