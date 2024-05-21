@@ -24,6 +24,7 @@ The model checkpoint (without finetuning) is avaliable at [huggingface](https://
 ## Data
 
 See [DATA.md](./docs/DATA.md) for downloading videos. The annotation can be found in `annotation` forder. You need to update the video paths with your own video paths.
+We also provide annotation for each task/dataset in [huggingface](https://huggingface.co/datasets/Yongxin-Guo/VTG-IT/tree/main/task-data-v1).
 
 ## Requirments
 
