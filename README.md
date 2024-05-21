@@ -17,6 +17,10 @@ bash install_requirements.sh
 To evaluate our checkpoint, we need pytorch >= 2.0.1, and then run the above script.
 To fintune our checkpoint, it's better to use NPU environment. We will try to conduct experiments on GPU in the future.
 
+## Model Checkpoints
+
+The model checkpoint (without finetuning) is avaliable at [huggingface](https://huggingface.co/Yongxin-Guo/VTG-LLM).
+
 ## Data
 
 See [DATA.md](./docs/DATA.md) for downloading videos. The annotation can be found in `annotation` forder. You need to update the video paths with your own video paths.
