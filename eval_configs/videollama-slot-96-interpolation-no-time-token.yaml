@@ -1,0 +1,60 @@
+model:
+  arch: vtgllm
+  model_type: pretrain_llama_v2
+  freeze_vit: True
+  freeze_qformer: True
+  max_txt_len: 2048
+  end_sym: "</s>"
+  low_resource: False
+
+  frozen_llama_proj: True
+  frozen_video_Qformer: True
+
+  vit_model: "model/eva-vit-g/eva_vit_g.pth"
+  llama_model: "model/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
+  q_former_model: "model/instruct-blip/instruct_blip_vicuna7b_trimmed.pth"
+  ckpt: "model/vtgllm/vtgllm.pth"
+
+  fusion_head_layers: 2
+  max_frame_pos: 96
+  fusion_header_type: "seqTransf"
+
+  sampler_type: 'slot'
+  sample_num: 256
+
+  use_video_qformer: False
+  use_grad_checkpoint: True
+  lora: True
+  lora_inference_mode: True
+  qformer_text_input: False
+  window_size: 32
+  stride: 32
+  real_time_stamp: True
+  max_time_pos: 8192
+  special_time_token: False
+  added_time_token: False
+  time_embedding_interpolation: True
+
+datasets:
+  webvid:
+    vis_processor:
+      train:
+        name: "alpro_video_eval"
+        n_frms: 96
+        image_size: 224
+    text_processor:
+      train:
+        name: "blip_caption"
+    num_video_query_token: 32
+    tokenizer_name: "model/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf/"
+    model_type: "llama_v2"
+    num_frm: 96
+    sample_type: 'uniform'
+    max_txt_len: 2048
+    stride: 32
+    special_time_token: False
+    # strict_video_token_num: 256
+    # visual_model_type: "eva_clip"
+
+run:
+  task: video_text_pretrain

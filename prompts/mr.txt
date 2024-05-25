@@ -1,0 +1,1 @@
+Find the video segment that corresponds to the given textual query '{}' and determine its start and end seconds.
