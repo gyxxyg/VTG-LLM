@@ -81,3 +81,15 @@ We are grateful for the following awesome projects:
 * [Video-LLaVA](https://github.com/PKU-YuanGroup/Video-LLaVA)
 * [entropy_estimators](https://github.com/paulbrodersen/entropy_estimators)
 
+## Bibliography
+If you find this repository helpful for your project, please consider citing:
+```
+@article{guo2024vtg,
+  title={VTG-LLM: Integrating Timestamp Knowledge into Video LLMs for Enhanced Video Temporal Grounding},
+  author={Guo, Yongxin and Liu, Jingyu and Li, Mingda and Tang, Xiaoying and Chen, Xi and Zhao, Bo},
+  journal={arXiv preprint arXiv:2405.13382},
+  year={2024}
+}
+```
+
+
