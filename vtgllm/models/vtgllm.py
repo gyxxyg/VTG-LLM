@@ -212,7 +212,6 @@ class VTGLLM(Blip2Base):
             fusion_head_layers=2,
             num_video_query_token=32,
             lora=False,
-            second_lora=False,
             qformer_text_input=False,
             lora_inference_mode=True,
             window_size=0,
@@ -233,7 +232,6 @@ class VTGLLM(Blip2Base):
         self.time_loss=time_loss
         self.use_video_qformer=use_video_qformer
         self.sampler_type = sampler_type
-        self.second_lora = second_lora
         assert not (self.use_video_qformer and self.sampler_type != 'none'), "can not use sampler and video qformer at the same time!"
         print('use_video_qformer', use_video_qformer)
         print('num query token', num_query_token)
@@ -345,6 +343,12 @@ class VTGLLM(Blip2Base):
                 target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj']
             )
             self.llama_model = get_peft_model(self.llama_model, config)
+            if not lora_inference_mode:
+                for name, param in self.llama_model.named_parameters():
+                    if 'lora' in name:
+                        param.requires_grad = False
+                        param = param.float()
+                        param.requires_grad = True
             self.llama_model.print_trainable_parameters()
 
         logging.info('Loading LLAMA proj')
@@ -614,16 +618,10 @@ class VTGLLM(Blip2Base):
             p_after_tokens = self.llama_tokenizer(
                 p_after, return_tensors="pt", add_special_tokens=False).to(img_embeds.device)
             if self.lora:  # peft
-                if self.second_lora:
-                    p_before_embeds = self.llama_model.get_base_model().get_base_model().model.embed_tokens(
-                        p_before_tokens.input_ids).expand(batch_size, -1, -1)
-                    p_after_embeds = self.llama_model.get_base_model().get_base_model().model.embed_tokens(p_after_tokens.input_ids).expand(
-                        batch_size, -1, -1)
-                else:
-                    p_before_embeds = self.llama_model.get_base_model().model.embed_tokens(
-                        p_before_tokens.input_ids).expand(batch_size, -1, -1)
-                    p_after_embeds = self.llama_model.get_base_model().model.embed_tokens(p_after_tokens.input_ids).expand(
-                        batch_size, -1, -1)
+                p_before_embeds = self.llama_model.get_base_model().model.embed_tokens(
+                    p_before_tokens.input_ids).expand(batch_size, -1, -1)
+                p_after_embeds = self.llama_model.get_base_model().model.embed_tokens(p_after_tokens.input_ids).expand(
+                    batch_size, -1, -1)
             else:
                 p_before_embeds = self.llama_model.model.embed_tokens(p_before_tokens.input_ids).expand(batch_size, -1,
                                                                                                         -1)
@@ -676,10 +674,7 @@ class VTGLLM(Blip2Base):
             temp_input_ids = copy.deepcopy(input_ids)
             temp_input_ids[temp_input_ids == im_patch_token_id] = 0
             if self.lora:
-                if self.second_lora:
-                    temp_input_embedding = self.llama_model.get_base_model().get_base_model().model.embed_tokens(temp_input_ids)
-                else:
-                    temp_input_embedding = self.llama_model.get_base_model().model.embed_tokens(temp_input_ids)
+                temp_input_embedding = self.llama_model.get_base_model().model.embed_tokens(temp_input_ids)
             else:
                 temp_input_embedding = self.llama_model.model.embed_tokens(temp_input_ids)
 
@@ -761,12 +756,8 @@ class VTGLLM(Blip2Base):
                              dtype=to_regress_tokens.input_ids.dtype,
                              device=to_regress_tokens.input_ids.device) * self.llama_tokenizer.bos_token_id
             if self.lora:
-                if self.second_lora:
-                    bos_embeds = self.llama_model.get_base_model().get_base_model().model.embed_tokens(bos)
-                    to_regress_embeds = self.llama_model.get_base_model().get_base_model().model.embed_tokens(to_regress_tokens.input_ids)
-                else:
-                    bos_embeds = self.llama_model.get_base_model().model.embed_tokens(bos)
-                    to_regress_embeds = self.llama_model.get_base_model().model.embed_tokens(to_regress_tokens.input_ids)
+                bos_embeds = self.llama_model.get_base_model().model.embed_tokens(bos)
+                to_regress_embeds = self.llama_model.get_base_model().model.embed_tokens(to_regress_tokens.input_ids)
             else:
                 bos_embeds = self.llama_model.model.embed_tokens(bos)
                 to_regress_embeds = self.llama_model.model.embed_tokens(to_regress_tokens.input_ids)
@@ -835,7 +826,6 @@ class VTGLLM(Blip2Base):
         sample_num = cfg.get('sample_num', 256)
         time_embedding_interpolation=cfg.get('time_embedding_interpolation', False)
         time_token_initialization=cfg.get('time_token_initialization', True)
-        second_lora = cfg.get('second_lora', False)
         print('max time pos', max_time_pos)
         model = cls(
             vit_model=vit_model,
@@ -864,7 +854,6 @@ class VTGLLM(Blip2Base):
             num_video_query_token=num_video_query_token,
             llama_proj_model=llama_proj_model,
             lora=lora,
-            second_lora=second_lora,
             qformer_text_input=qformer_text_input,
             lora_inference_mode=lora_inference_mode,
             window_size=window_size,
@@ -902,6 +891,13 @@ class VTGLLM(Blip2Base):
 
             model.llama_model.resize_token_embeddings(len(model.llama_tokenizer))
 
+            # if lora:
+            #     model.llama_model.base_model.model.model.embed_tokens.weight.requires_grad = False
+            #     model.llama_model.base_model.model.lm_head.weight.requires_grad = False
+            # else:
+            #     model.llama_model.model.embed_tokens.weight.requires_grad = False
+            #     model.llama_model.lm_head.weight.requires_grad = False
+
             if lora_inference_mode:
                 if lora:
                     model.llama_model.base_model.model.model.embed_tokens.weight.requires_grad = False
@@ -921,18 +917,6 @@ class VTGLLM(Blip2Base):
                     model.llama_model.model.embed_tokens.weight.requires_grad=True
                     model.llama_model.lm_head.weight.requires_grad=True
 
-        # ckpt_path_2 = cfg.get("ckpt_2", "")
-        # if ckpt_path_2:
-        #     print("Load pre Checkpoint: {}".format(ckpt_path_2))
-        #     ckpt = torch.load(ckpt_path_2, map_location="cpu")
-        #     if 'llama_model.model.embed_tokens.weight' in ckpt['model']:
-        #         ckpt['model']['llama_model.base_model.model.model.embed_tokens.weight'] = ckpt['model']['llama_model.model.embed_tokens.weight']
-        #     if 'llama_model.lm_head.weight' in ckpt['model']:
-        #         ckpt['model']['llama_model.base_model.model.lm_head.weight'] = ckpt['model']['llama_model.lm_head.weight']
-        #     msg = model.load_state_dict(ckpt['model'], strict=False)
-        #     for key in ckpt['model'].keys():
-        #         if key not in msg.missing_keys and key not in msg.unexpected_keys:
-        #             print('ckpt pre', key)
 
         if ckpt_path:
             print("Load first Checkpoint: {}".format(ckpt_path))
@@ -946,6 +930,14 @@ class VTGLLM(Blip2Base):
             else:
                 for key in ori_ckpt['model'].keys():
                     ckpt['model'][key.replace('vision_encoder', 'visual_encoder').replace('qformer', 'Qformer').replace('vision_layernorm', 'ln_vision')] = ori_ckpt['model'][key]
+
+            if lora and not lora_inference_mode:
+                for key in ckpt['model'].keys():
+                    if 'lora' in key:
+                        ckpt['model'][key] = ckpt['model'][key].float()
+                        # print(key, ckpt['model'][key])
+
+                
 
             if special_time_token and added_time_token and lora:
                 if 'llama_model.model.embed_tokens.weight' in ckpt['model']:
@@ -994,26 +986,6 @@ class VTGLLM(Blip2Base):
                     ckpt['model']['video_time_position_embedding'][idx] = idx_weights
 
                 print(ckpt['model']['video_time_position_embedding'])
-
-
-                
-
-
-            if second_lora and lora_inference_mode:
-                for name, param in model.named_parameters():
-                    param.requires_grad = False
-                from peft import LoraConfig, get_peft_model, TaskType
-                config = LoraConfig(
-                    task_type=TaskType.CAUSAL_LM,
-                    inference_mode=lora_inference_mode,
-                    r=32,
-                    lora_alpha=32,
-                    lora_dropout=0.1,
-                    target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj']
-                )
-                model.llama_model = get_peft_model(model.llama_model, config)
-                model.llama_model.print_trainable_parameters()
-
             
 
             
@@ -1104,21 +1076,5 @@ class VTGLLM(Blip2Base):
 
         model.Qformer.cls = None
         # model.llama_model.print_trainable_parameters()
-
-
-        if second_lora and not lora_inference_mode:
-            for name, param in model.llama_model.named_parameters():
-                param.requires_grad = False
-            from peft import LoraConfig, get_peft_model, TaskType
-            config = LoraConfig(
-                task_type=TaskType.CAUSAL_LM,
-                inference_mode=lora_inference_mode,
-                r=32,
-                lora_alpha=32,
-                lora_dropout=0.1,
-                target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj']
-            )
-            model.llama_model = get_peft_model(model.llama_model, config)
-            # model.llama_model.print_trainable_parameters()
 
         return model
