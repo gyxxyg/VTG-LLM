@@ -375,10 +375,7 @@ class Chat:
             for i, seg in enumerate(prompt_segs)
         ]
         if self.model.lora:
-            if self.model.second_lora:
-                seg_embs = [self.model.llama_model.get_base_model().get_base_model().model.embed_tokens(seg_t) for seg_t in seg_tokens]
-            else:
-                seg_embs = [self.model.llama_model.get_base_model().model.embed_tokens(seg_t) for seg_t in seg_tokens]
+            seg_embs = [self.model.llama_model.get_base_model().model.embed_tokens(seg_t) for seg_t in seg_tokens]
         else:
             seg_embs = [self.model.llama_model.model.embed_tokens(seg_t) for seg_t in seg_tokens]
         mixed_embs = [emb for pair in zip(seg_embs[:-1], img_list) for emb in pair] + [seg_embs[-1]]
