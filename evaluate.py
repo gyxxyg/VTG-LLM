@@ -267,7 +267,7 @@ def main(args):
     for jterm in anno_data:
         vname = jterm["image_id"].split("/")[-1]
         vid_path = os.path.join(video_path, vname)
-        print(vid_path)
+        # print(vid_path)
         if not os.path.exists(vid_path):
             missing_videos.append(vid_path)
             continue
