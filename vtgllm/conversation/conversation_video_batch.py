@@ -416,8 +416,6 @@ class Chat:
     def get_context_emb(self, convs, img_lists, lora=False):
         if not self.model.lora:
             embed_model = self.model.llama_model.model 
-        elif not self.model.second_lora:
-            embed_model = self.model.llama_model.get_base_model().model  
         else:
             embed_model = self.model.llama_model.get_base_model().get_base_model().model
 
