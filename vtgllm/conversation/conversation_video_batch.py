@@ -417,7 +417,7 @@ class Chat:
         if not self.model.lora:
             embed_model = self.model.llama_model.model 
         else:
-            embed_model = self.model.llama_model.get_base_model().get_base_model().model
+            embed_model = self.model.llama_model.get_base_model().model
 
         pad_token_id = self.model.llama_tokenizer.pad_token_id
         pad_emb = embed_model.embed_tokens(torch.tensor([pad_token_id], device=self.device))  # 1 * 4096
