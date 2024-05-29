@@ -267,6 +267,7 @@ def main(args):
     for jterm in anno_data:
         vname = jterm["image_id"].split("/")[-1]
         vid_path = os.path.join(video_path, vname)
+        print(vid_path)
         if not os.path.exists(vid_path):
             missing_videos.append(vid_path)
             continue
@@ -290,10 +291,7 @@ def main(args):
             captions.append(jterm["caption"])
             qids.append(jterm["id"])
 
-    print('Parse Data Done.')
-    with open('/workspace/user_code/ft_local/missing_video_names_activity.txt', 'w') as f:
-        for video_path in missing_videos:
-            f.write(f'{video_path}\n')
+    print(f'Parse Data Done, {len(vnames)} videos')
 
     results = []
     bz = args.batch_size
