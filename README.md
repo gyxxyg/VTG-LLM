@@ -3,8 +3,10 @@
 <h5 align="center"> If our project helps you, please give us a star ⭐ and cite our <a href="#bibliography">paper</a>!</h2>
 <h5 align="center">
 
-[![hf_space](https://img.shields.io/badge/🤗-Paper%20In%20HF-red.svg)](https://huggingface.co/papers/2405.14297)
-[![arxiv](https://img.shields.io/badge/Arxiv-2405.14297-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2405.13382)
+[![hf_space](https://img.shields.io/badge/🤗-Paper%20In%20HF-red.svg)](https://huggingface.co/papers/2405.13382)
+[![hf_checkpoint](https://img.shields.io/badge/🤗-Checkpoints-9C276A.svg)](https://huggingface.co/Yongxin-Guo/VTG-LLM)
+[![hf_data](https://img.shields.io/badge/🤗-Datasets-9C276A.svg)](https://huggingface.co/Yongxin-Guo/VTG-LLM)
+[![arxiv](https://img.shields.io/badge/Arxiv-2405.13382-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2405.13382)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgyxxyg%2FVTG-LLM&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visitor&edge_flat=false)](https://hits.seeyoufarm.com)                
 
 
@@ -34,14 +36,25 @@ If an NPU is not available, a V100 can also be employed for training and evaluat
 
 ## Model Checkpoints
 
-The model checkpoint (without finetuning) is avaliable at [huggingface](https://huggingface.co/Yongxin-Guo/VTG-LLM).
+The model checkpoint (without finetuning) is avaliable at [huggingface](https://huggingface.co/Yongxin-Guo/VTG-LLM):
+```
+git lfs install
+
+git clone https://huggingface.co/Yongxin-Guo/VTG-LLM
+```
 
 ## Data
 
-See [DATA.md](./docs/DATA.md). 
+See [DATA.md](./docs/DATA.md) for details. The data annotations are avaliable at [huggingface](https://huggingface.co/datasets/Yongxin-Guo/VTG-IT):
+```
+git lfs install
+
+git clone https://huggingface.co/datasets/Yongxin-Guo/VTG-IT
+```
 
 ## Requirments
 
+Please download the following model checkpoints:
 - EVA-ViT-g: https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/eva_vit_g.pth
 - InstructBLIP: https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/InstructBLIP/instruct_blip_vicuna7b_trimmed.pth
 - Video-LLaMA: https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-7B-Finetuned/tree/main
