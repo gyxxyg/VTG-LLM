@@ -29,9 +29,6 @@ MANIFEST
 .idea
 
 vtgllm/ckpt/
-tvg*/
-dvc*/
-vhd*/
 wandb/
 .vscode/
 kernel_meta*/
