@@ -82,7 +82,7 @@ args = parse_args()
 cfg = Config(args)
 
 DIR="your_dir_path"
-MODEL_DIR=f"ckpts/checkpoint_9.pth"
+MODEL_DIR=f"checkpoints/VTG-LLM/vtgllm.pth"
 
 model_config = cfg.model_cfg
 model_config.device_8bit = args.gpu_id
