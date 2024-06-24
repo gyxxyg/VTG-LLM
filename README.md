@@ -111,7 +111,3 @@ If you find this repository helpful for your project, please consider citing:
   year={2024}
 }
 ```
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=gyxxyg/VTG-LLM&type=Date)](https://star-history.com/#gyxxyg/VTG-LLM&Date)
