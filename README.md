@@ -97,8 +97,8 @@ bash eval.sh
 
 | ActivityNet | CIDER | METEOR | SODA_c | F1 |
 | --- | --- | --- | --- | --- |
-| t=1.0 (paper) | 20.7 | 5.9 | 5.1 | 34.8 |
-| t=0.1 | 18.2 | 5.7 | 4.7 | 34.0 |
+| t=1.0 (paper) | 18.2 | 5.7 | 4.7 | 34.0 |
+| t=0.1 | 20.7 | 5.9 | 5.1 | 34.8 |
 
 #### Demo
 You need to firstly change the path of videos and model checkpoints to your path.
