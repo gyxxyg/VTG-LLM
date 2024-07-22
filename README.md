@@ -11,6 +11,7 @@
 
 
 ## News
+- 7/22/2024, Update evaluation results using various temperature.
 - 5/28/2024, [NPU checkpoints](https://huggingface.co/Yongxin-Guo/VTG-LLM) can be fine-tuned on V100 GPU.
 
 ## Overview
@@ -77,11 +78,34 @@ Config the downstream task in [eval.sh](eval.sh).
 bash eval.sh
 ```
 
+#### Results
+
+| Youcook2 | CIDER | METEOR | SODA_c | F1 |
+| --- | --- | --- | --- | --- |
+| t=1.0 (paper) | 5.0 | 1.9 | 1.5 | 17.5 |
+| t=0.1 | 5.4 | 1.8 | 1.6 | 18.4 |
+
+| Charades-STA | 0.3 | 0.5 | 0.7 |
+| --- | --- | --- | --- |
+| t=1.0 (paper) | 52.0 | 33.8 | 15.7  |
+| t=0.1 | 53.9 | 36.3 | 16.6 |
+
+| QVHighlights | mAP | Hit@1 |
+| --- | --- | --- |
+| t=1.0 (paper) | 16.5 | 33.5 |
+| t=0.1 | 16.2 | 30.7 |
+
+| ActivityNet | CIDER | METEOR | SODA_c | F1 |
+| --- | --- | --- | --- | --- |
+| t=1.0 (paper) | 20.7 | 5.9 | 5.1 | 34.8 |
+| t=0.1 | 18.2 | 5.7 | 4.7 | 34.0 |
+
 #### Demo
 You need to firstly change the path of videos and model checkpoints to your path.
 ```
 python gradio_demo.py
 ```
+
 ## Recommended GPUs
 * Instruction-tuning: 16xATN 910B
 * Inference: 1xV100
