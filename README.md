@@ -101,6 +101,20 @@ bash eval.sh
 | t=0.1 | 20.7 | 5.9 | 5.1 | 34.8 |
 
 #### Demo
+
+<div align="center"><video src="https://github.com/gyxxyg/VTG-LLM/blob/master/cat_and_chicken.mp4" width="800"></div>
+
+```
+# Describe this video
+
+A cute little kitten is sleeping on a couch. A little chicken is sitting on the cats chest and looking at the camera. The cat is purring and the chicken is moving its head.
+
+# Please locate a series of events in the video, output the start and end timestamps of each event, and describe each event in sentences.
+
+0000.0 - 0010.0 seconds, A cute kitten is sleeping on a couch. 0010.0 - 0020.0 seconds, A yellow bird lands on the couch and gently touches the kitten's head. 0020.0 - 0030.0 seconds, The bird picks up the kitten and starts to play with it. 0030.0 - 0040.0 seconds, The kitten tries to push the bird away, but the bird continues to play with it. 0040.0 - 0050.0 seconds, The kitten falls asleep on the couch.
+```
+
+#### Gradio Demo
 You need to firstly change the path of videos and model checkpoints to your path.
 ```
 python gradio_demo.py
