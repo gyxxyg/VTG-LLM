@@ -102,9 +102,9 @@ bash eval.sh
 
 #### Demo
 
-<div align="center"><video src="https://github.com/gyxxyg/VTG-LLM/blob/master/cat_and_chicken.mp4" width="800"></div>
-
 ```
+# cat_and_chicken.mp4
+
 # Describe this video
 
 A cute little kitten is sleeping on a couch. A little chicken is sitting on the cats chest and looking at the camera. The cat is purring and the chicken is moving its head.
