@@ -11,6 +11,7 @@
 
 
 ## News
+- 10/10/2024, We released a more powerful temporal grounding video LLM [TRACE](https://github.com/gyxxyg/TRACE). 
 - 7/22/2024, Update evaluation results using various temperature.
 - 5/28/2024, [NPU checkpoints](https://huggingface.co/Yongxin-Guo/VTG-LLM) can be fine-tuned on V100 GPU.
 
